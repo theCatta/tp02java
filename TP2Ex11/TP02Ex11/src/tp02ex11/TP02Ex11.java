@@ -6,24 +6,25 @@
 package tp02ex11;
 
 import java.util.Scanner;
+import Jama.Matrix;
 
 /**
  *
- * @author gabriel Ferreira de Souza
- * Guilherme FErreira Santos
+ * @author Gabriel Ferreira de Souza
+ * Guilherme Ferreira Santos
  */
 public class TP02Ex11 {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int a = 0, dt = 0;
+        int a = 0;
         
         do{
         System.out.printf("Insira o valor de a da matriz quadrada AxA: ");
         a = scan.nextInt();
-        } while(a > 10);
+        } while(a > 10 || a < 1);
         
-        int[][] mt = new int[a][a];
+        double[][] mt = new double[a][a];
         
         for(int i = 0; i < a; ++i){
             for(int j = 0; j < a; ++j){
@@ -32,39 +33,22 @@ public class TP02Ex11 {
             }
         }
         
-        
-        if(a == 1){
-            dt = mt[0][0];
-        }
-        int temp[][] = new int[a][a];
-        int multiplicador = 1;
-        
-        for(int f = 0; f < a; ++f){
-            int g = 0, d = 0;
-            for(int i = 0; i < a; ++i){
-                for(int j = 0; j < a; ++a){
-                    if(i != 0 && j != f){
-                        temp[g][d++] = mt[i][j];
-                        if(d == a - 1){
-                            d = 0;
-                            g++;
-                        }
-                    }
-                }
-            }
-            dt += multiplicador * mt[0][f] * (a-1);
-            multiplicador = -multiplicador;
-        }
+        Matrix matriz = new Matrix(mt);
         
         System.out.print("\nMatriz:\n");
         for(int i = 0; i < a; ++i){
             for(int j = 0; j < a; ++j){
-                //mt[i][j] = mt[i][j] * mult;
-                System.out.print("|" + mt[i][j] + "|");
+                if(j == 0){
+                    System.out.print("|" + mt[i][j]);
+                } else if(j == mt.length - 1){
+                    System.out.print(mt[i][j] + "|");
+                } else{
+                    System.out.print(" " + mt[i][j] + " ");
+                }
             }
             System.out.print("\n");
         }
-        
-        System.out.printf("\nDeterminante: %d\n", dt);
+                
+        System.out.printf("\nDeterminante é: %.2f\n", matriz.det());
     }
 }
