@@ -30,7 +30,11 @@ public class TP02Ex05 {
         
         for(int i = 0; i < a; ++i){
             for(int j = 0; j < b; ++j){
-                System.out.print("|" + mt[i][j] + "|");
+                if(j == 0){
+                    System.out.print("|" + mt[i][j]);
+                } else {
+                    System.out.print(" " + mt[i][j] + "|");
+                }
             }
             System.out.print("\n");
         }
